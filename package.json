@@ -1,0 +1,17 @@
+{
+  "name": "btc-zeta",
+  "version": "1.0.0",
+  "description": "huh",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bitcoinjs-lib": "^6.1.5",
+    "ecpair": "^2.1.0"
+  }
+}
