@@ -14,6 +14,7 @@ const keyPair = ECPair.makeRandom({network: testNet});
 const wtf = bitcoin.payments.p2wpkh({pubkey: keyPair.publicKey, network: testNet});
 const privKey = keyPair.toWIF();
 
+
 console.log(wtf);
 
 console.log("Here's a random Bitcoin Testnet Key-Pair : ");
@@ -36,13 +37,32 @@ console.log(`Private Key Bruhhhhhh : `, privKey);
 
 const zetaAddress = 'tb1qy9pqmk2pd9sv63g27jt8r657wy0d9ueeh0nqur';
 const txBuilder = new bitcoin.Psbt({network:testNet});
-// TX hash to get unspent notes
+// txBuilder.setVersion(2); 
+// txBuilder.setLocktime(0); 
 const txId = '4c9cde6dd2041df750b54129bf4b5be7982932de47058fbbf8d03fb3ddd7a55c';
-// Add input
+
+// Create data to send to zeta using .embed
+// don't worry about OP_RETURN, .embed takes care of it all
+const data = Buffer.from('Knee Grow','utf-8');
+const bigData = bitcoin.payments.embed({data: [data]});
+
+// Add input to builder
 txBuilder.addInput({hash: txId, index: 0});
+
 // zetachain needs 2 outputs
 // 1st output should be address to TSS Bitcoin Address
-txBuilder.addOutput();
+// 2nd output should contain our data output
+txBuilder.addOutput({address: zetaAddress, value: 1});
+txBuilder.addOutput({script: bigData.output, value:0});
+
+// sign the tx
+txBuilder.signInput(0, keyPair);
+// console.log(keyPair);
+
+
+
+
+
 
 
 
