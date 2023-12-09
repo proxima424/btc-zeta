@@ -10,3 +10,48 @@ const testNet = bitcoin.networks.testnet;
 // we need ones with "tb1" to work with
 // This is P2WPKH/P2WSH addresses (Pay-to-Witness-Public-Key-Hash/Script Hash) 
 
+const keyPair = ECPair.makeRandom({network: testNet});
+const wtf = bitcoin.payments.p2wpkh({pubkey: keyPair.publicKey, network: testNet});
+const privKey = keyPair.toWIF();
+
+console.log(wtf);
+
+console.log("Here's a random Bitcoin Testnet Key-Pair : ");
+console.log(`Public Bitcoin Address : `, wtf.address);
+console.log(`Private Key Bruhhhhhh : `, privKey);
+
+// If I have bitcoin holdings, that means I have several "unspent notes"
+// these unspent notes, I get from the {OUTPUT} field of my previous transaction
+// So we need previous transaction info while sending a new txs
+
+// We'll fund our bitcoin public address from faucet and get transaction ID from that website
+// And use this txsID in building my new transaction
+
+// Storing keys here 
+// Here's a random Bitcoin Testnet Key-Pair : 
+// Public Bitcoin Address :  tb1q0vqlvfw5uccygpqy6kcq00yjqp37un7056xzsq
+// Private Key Bruhhhhhh :  cTqgZWes2CLXyt2kevQjSpJcgpEweBbe8MntZAwVaVzctyamnLoQ
+// TX Hash of faucet funding :  4c9cde6dd2041df750b54129bf4b5be7982932de47058fbbf8d03fb3ddd7a55c
+
+
+const zetaAddress = 'tb1qy9pqmk2pd9sv63g27jt8r657wy0d9ueeh0nqur';
+const txBuilder = new bitcoin.Psbt({network:testNet});
+// TX hash to get unspent notes
+const txId = '4c9cde6dd2041df750b54129bf4b5be7982932de47058fbbf8d03fb3ddd7a55c';
+// Add input
+txBuilder.addInput({hash: txId, index: 0});
+// zetachain needs 2 outputs
+// 1st output should be address to TSS Bitcoin Address
+txBuilder.addOutput();
+
+
+
+
+
+
+
+
+
+
+
+
