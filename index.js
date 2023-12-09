@@ -37,8 +37,8 @@ console.log(`Private Key Bruhhhhhh : `, privKey);
 
 const zetaAddress = 'tb1qy9pqmk2pd9sv63g27jt8r657wy0d9ueeh0nqur';
 const txBuilder = new bitcoin.Psbt({network:testNet});
-// txBuilder.setVersion(2); 
-// txBuilder.setLocktime(0); 
+txBuilder.setVersion(2); 
+txBuilder.setLocktime(0); 
 const txId = '4c9cde6dd2041df750b54129bf4b5be7982932de47058fbbf8d03fb3ddd7a55c';
 
 // Create data to send to zeta using .embed
